@@ -57,7 +57,7 @@ def login():
     if form.validate_on_submit():
         try:
             user = User.query.filter_by(email=form.email.data).first()
-            if check_password_hash(user.pwd, form.pwd.data):
+            if check_password_hash(user.password, form.password.data):
                 login_user(user)
                 return redirect(url_for('index'))
             else:
@@ -81,13 +81,13 @@ def register():
     if form.validate_on_submit():
         try:
             email = form.email.data
-            pwd = form.pwd.data
+            password = form.password.data
             username = form.username.data
             
             newuser = User(
                 username=username,
                 email=email,
-                pwd=bcrypt.generate_password_hash(pwd),
+                password=bcrypt.generate_password_hash(password),
             )
     
             db.session.add(newuser)

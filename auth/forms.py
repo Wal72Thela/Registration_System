@@ -19,9 +19,7 @@ class login_form(FlaskForm):
     email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=72)])
     # Placeholder labels to enable form rendering
-    username = StringField(
-        validators=[Optional()]
-    )
+    username = StringField(validators=[Optional()] )
 
 
 class register_form(FlaskForm):
@@ -37,12 +35,12 @@ class register_form(FlaskForm):
         ]
     )
     email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
-    pwd = PasswordField(validators=[InputRequired(), Length(8, 72)])
-    cpwd = PasswordField(
+    password = PasswordField(validators=[InputRequired(), Length(8, 72)])
+    confirm_password = PasswordField(
         validators=[
             InputRequired(),
             Length(8, 72),
-            EqualTo("pwd", message="Passwords must match !"),
+            EqualTo("password", message="Passwords must match !"),
         ]
     )
 
